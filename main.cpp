@@ -16,6 +16,19 @@ void print_array (const char array [3][3])
     cout << endl;
 }
 
+//Функция определения победителя
+bool check_winner(const char array [3][3], const char player)
+{
+    for (int i=0; i<3; i++)
+    {
+        if (array[i][0] == player && array[i][1] == player && array[i][2] == player) return true;
+        if (array[0][i] == player && array[1][i] == player && array[2][i] == player) return true;
+    }
+    if (array[0][0] == player && array[1][1] == player && array[2][2] == player) return true;
+    if (array[0][2] == player && array[1][1] == player && array[2][0] == player) return true;
+    return false;
+}
+
 int main() {
 
     cout << "------------Tic-Tac-Toe game------------\n\n";
@@ -32,6 +45,9 @@ int main() {
 
     //Инициализация координат игрового поля
     int x, y;
+
+    //Инициализация флага наличия победителя
+    bool winner=false;
 
     //Организация цикла игры
     while (step<10)
@@ -55,7 +71,19 @@ int main() {
         //Вывод игрового поля
         print_array(playingField);
 
+        //Проверка на наличие победителя начиная с пятого хода
+        if (step>4)
+            {
+            winner=check_winner(playingField, playerName);
+            if (winner)
+                {
+                cout << "Player " << playerName << " WINS!" << endl;
+                break;
+                }
+            }
 
+        //Если 10 ход и победителя нет, вывести сообщение о ничьей
+        if (step == 10 && !winner) cout << "The result of the game is a draw!" << endl;
     }
     return 0;
 }
