@@ -46,9 +46,6 @@ int main() {
     //Инициализация координат игрового поля
     int x, y;
 
-    //Инициализация флага наличия победителя
-    bool winner=false;
-
     //Организация цикла игры
     while (step<10)
     {
@@ -74,7 +71,7 @@ int main() {
         //Проверка на наличие победителя начиная с пятого хода
         if (step>4)
             {
-            winner=check_winner(playingField, playerName);
+            bool winner=check_winner(playingField, playerName);
             if (winner)
                 {
                 cout << "Player " << playerName << " WINS!" << endl;
@@ -83,7 +80,7 @@ int main() {
             }
 
         //Если 10 ход и победителя нет, вывести сообщение о ничьей
-        if (step == 10 && !winner) cout << "The result of the game is a draw!" << endl;
+        if (step == 10) cout << "The result of the game is a draw!" << endl;
     }
     return 0;
 }
